@@ -3,6 +3,73 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Professional Color Palette for Employee Management */
+:root {
+  --radius: 0.625rem;
+
+  /* Primary Colors - Deep Navy Blue (Professional, Trustworthy) */
+  --background: oklch(98% 0 0);
+  --foreground: oklch(15% 0 0);
+  --card: oklch(100% 0 0);
+  --card-foreground: oklch(15% 0 0);
+  --popover: oklch(100% 0 0);
+  --popover-foreground: oklch(15% 0 0);
+
+  /* Primary - Deep Navy */
+  --primary: oklch(49.94% 0.118 242.29);
+  --primary-foreground: oklch(98% 0 0);
+
+  /* Secondary - Cool Gray */
+  --secondary: oklch(65.13% 0.171 277.22);
+  --secondary-foreground: oklch(98% 0 0);
+
+  /* Muted - Soft Gray */
+  --muted: oklch(96% 0.005 250);
+  --muted-foreground: oklch(45% 0.015 250);
+
+  /* Accent - Forest Green (Growth, Stability) */
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(15% 0 0);
+
+  /* Success - Professional Green */
+  --success: oklch(45% 0.12 145);
+  --success-foreground: oklch(98% 0 0);
+
+  /* Warning - Warm Amber (Energy, Focus) */
+  --warning: oklch(65% 0.15 80);
+  --warning-foreground: oklch(15% 0 0);
+
+  /* Info - Professional Blue */
+  --info: oklch(55% 0.15 220);
+  --info-foreground: oklch(98% 0 0);
+
+  /* Destructive - Professional Red */
+  --destructive: oklch(55% 0.18 25);
+  --destructive-foreground: oklch(98% 0 0);
+
+  /* Borders and Inputs */
+  --border: oklch(90% 0.005 250);
+  --input: oklch(92% 0.005 250);
+  --ring: oklch(25% 0.03 250);
+
+  /* Chart Colors - Professional Data Visualization */
+  --chart-1: oklch(45% 0.12 145); /* Forest Green */
+  --chart-2: oklch(55% 0.15 220); /* Professional Blue */
+  --chart-3: oklch(65% 0.15 80); /* Warm Amber */
+  --chart-4: oklch(50% 0.12 280); /* Deep Purple */
+  --chart-5: oklch(60% 0.18 25); /* Professional Red */
+
+  /* Sidebar - Clean and Professional */
+  --sidebar: oklch(97% 0.005 250);
+  --sidebar-foreground: oklch(25% 0.03 250);
+  --sidebar-primary: oklch(25% 0.03 250);
+  --sidebar-primary-foreground: oklch(98% 0 0);
+  --sidebar-accent: oklch(35% 0.08 150);
+  --sidebar-accent-foreground: oklch(98% 0 0);
+  --sidebar-border: oklch(90% 0.005 250);
+  --sidebar-ring: oklch(25% 0.03 250);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -44,77 +111,6 @@
   --color-warning-foreground: var(--warning-foreground);
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-}
-
-/* Professional Color Palette for Employee Management */
-:root {
-  --radius: 0.5rem;
-
-  /* Primary Colors - Deep Navy Blue (Professional, Trustworthy) */
-  --background: oklch(98% 0 0);
-  --foreground: oklch(15% 0 0);
-  --card: oklch(100% 0 0);
-  --card-foreground: oklch(15% 0 0);
-  --popover: oklch(100% 0 0);
-  --popover-foreground: oklch(15% 0 0);
-
-  /* Primary - Deep Navy */
-  --primary: oklch(25% 0.03 250);
-  --primary-foreground: oklch(98% 0 0);
-
-  /* Secondary - Cool Gray */
-  --secondary: oklch(95% 0.005 250);
-  --secondary-foreground: oklch(25% 0.03 250);
-
-  /* Muted - Soft Gray */
-  --muted: oklch(96% 0.005 250);
-  --muted-foreground: oklch(45% 0.015 250);
-
-  /* Accent - Forest Green (Growth, Stability) */
-  --accent: oklch(35% 0.08 150);
-  --accent-foreground: oklch(98% 0 0);
-
-  /* Success - Professional Green */
-  --success: oklch(45% 0.12 145);
-  --success-foreground: oklch(98% 0 0);
-
-  /* Warning - Warm Amber (Energy, Focus) */
-  --warning: oklch(65% 0.15 80);
-  --warning-foreground: oklch(15% 0 0);
-
-  /* Info - Professional Blue */
-  --info: oklch(55% 0.15 220);
-  --info-foreground: oklch(98% 0 0);
-
-  /* Destructive - Professional Red */
-  --destructive: oklch(55% 0.18 25);
-  --destructive-foreground: oklch(98% 0 0);
-
-  /* Borders and Inputs */
-  --border: oklch(90% 0.005 250);
-  --input: oklch(92% 0.005 250);
-  --ring: oklch(25% 0.03 250);
-
-  /* Chart Colors - Professional Data Visualization */
-  --chart-1: oklch(45% 0.12 145); /* Forest Green */
-  --chart-2: oklch(55% 0.15 220); /* Professional Blue */
-  --chart-3: oklch(65% 0.15 80); /* Warm Amber */
-  --chart-4: oklch(50% 0.12 280); /* Deep Purple */
-  --chart-5: oklch(60% 0.18 25); /* Professional Red */
-
-  /* Sidebar - Clean and Professional */
-  --sidebar: oklch(97% 0.005 250);
-  --sidebar-foreground: oklch(25% 0.03 250);
-  --sidebar-primary: oklch(25% 0.03 250);
-  --sidebar-primary-foreground: oklch(98% 0 0);
-  --sidebar-accent: oklch(35% 0.08 150);
-  --sidebar-accent-foreground: oklch(98% 0 0);
-  --sidebar-border: oklch(90% 0.005 250);
-  --sidebar-ring: oklch(25% 0.03 250);
 }
 
 .dark {
@@ -127,11 +123,11 @@
   --popover-foreground: oklch(95% 0.005 250);
 
   /* Primary - Lighter Navy for Dark Mode */
-  --primary: oklch(75% 0.08 250);
+  --primary: oklch(78.45% 0.123 234.95);
   --primary-foreground: oklch(12% 0.01 250);
 
   /* Secondary - Dark Gray */
-  --secondary: oklch(18% 0.01 250);
+  --secondary: oklch(29.79% 0.180 266.58);
   --secondary-foreground: oklch(95% 0.005 250);
 
   /* Muted - Medium Dark Gray */
@@ -139,7 +135,7 @@
   --muted-foreground: oklch(65% 0.015 250);
 
   /* Accent - Brighter Green for Dark Mode */
-  --accent: oklch(55% 0.12 150);
+  --accent: oklch(37.10% 0.225 273.54);
   --accent-foreground: oklch(8% 0.01 250);
 
   /* Success - Bright Green */
@@ -183,15 +179,10 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground font-sans;
-    font-feature-settings:
-      "rlig" 1,
-      "calt" 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 
   /* Typography Hierarchy for Professional Look */
@@ -225,30 +216,5 @@
   h4 {
     font-size: 1.25rem;
     font-weight: 600;
-  }
-
-  /* Professional data/code styling */
-  code,
-  pre,
-  .font-mono {
-    font-family: "JetBrains Mono", "Fira Code", monospace;
-    font-feature-settings:
-      "liga" 1,
-      "calt" 1;
-  }
-
-  /* Professional focus states */
-  :focus-visible {
-    outline: 2px solid var(--ring);
-    outline-offset: 2px;
-  }
-
-  /* Smooth transitions for professional feel */
-  * {
-    transition-property:
-      color, background-color, border-color, text-decoration-color, fill,
-      stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
   }
 }
