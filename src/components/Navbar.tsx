@@ -13,6 +13,7 @@ import {
   MenuIcon,
 } from "lucide-react";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
   const navList = [
@@ -54,7 +55,9 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <div className="hidden sm:flex sm:gap-4">
               <SignedOut>
-                <SignInButton />
+                <SignInButton>
+                  <Button>Sign In</Button>
+                </SignInButton>
               </SignedOut>
               <SignedIn>
                 <UserButton />
