@@ -14,7 +14,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Icons } from "@/components/ui/icons";
 import "@/app/sign-up/[[...sign-up]]/styles.css";
-import { RoleCombobox } from "./RoleCombobox";
 
 export default function SignUpPage() {
   return (
@@ -59,24 +58,6 @@ export default function SignUpPage() {
                     <p className="text-muted-foreground before:bg-border after:bg-border flex items-center gap-x-3 text-sm before:h-px before:flex-1 after:h-px after:flex-1">
                       or
                     </p>
-                    <Clerk.Field name="userName" className="space-y-2">
-                      <Clerk.Label asChild>
-                        <Label>Name</Label>
-                      </Clerk.Label>
-                      <Clerk.Input type="text" required asChild>
-                        <Input />
-                      </Clerk.Input>
-                      <Clerk.FieldError className="text-destructive block text-sm" />
-                    </Clerk.Field>
-                    <Clerk.Field name="role" className="space-y-2">
-                      <Clerk.Label asChild>
-                        <Label>Role</Label>
-                      </Clerk.Label>
-                      <Clerk.Input type="text" required asChild>
-                        <RoleCombobox />
-                      </Clerk.Input>
-                      <Clerk.FieldError className="text-destructive block text-sm" />
-                    </Clerk.Field>
                     <Clerk.Field name="emailAddress" className="space-y-2">
                       <Clerk.Label asChild>
                         <Label>Email</Label>
