@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/card";
 import { useState } from "react";
 import { RoleCombobox } from "./RoleCombobox";
+import { createUser } from "@/lib/actions";
 
 export default function OnboardingComponent() {
   const [error, setError] = useState("");
@@ -27,16 +28,35 @@ export default function OnboardingComponent() {
   };
 
   const handleSubmit = async (formData: FormData) => {
-    formData.append("role", selectedRole);
+    try {
+      // Clear any previous errors
+      setError("");
 
-    const res = await completeOnboarding(formData);
-    if (res?.message) {
-      // Reloads the user's data from the Clerk API
-      await user?.reload();
-      router.push("/");
-    }
-    if (res?.error) {
-      setError(res?.error);
+      // Add the selected role to form data
+      formData.append("role", selectedRole);
+
+      // Create user in database
+      const createUserResult = await createUser(formData);
+
+      // If user creation fails in database don't proceed with onboarding
+      if (!createUserResult.success) {
+        setError(createUserResult.error || "Failed to create user");
+        return;
+      }
+
+      // Complete onboarding with Clerk
+      const res = await completeOnboarding(formData);
+      if (res?.message) {
+        // Reloads the user's data from the Clerk API
+        await user?.reload();
+        router.push("/");
+      }
+      if (res?.error) {
+        setError(res?.error);
+      }
+    } catch (error) {
+      setError("An unexpected error occurred");
+      console.error("Error in handleSubmit: ", error);
     }
   };
   return (
@@ -96,7 +116,7 @@ export default function OnboardingComponent() {
                   type="number"
                   name="salary"
                   id="salary"
-                  placeholder="Annual salary"
+                  placeholder="Monthly salary"
                   className="w-full"
                   required
                 />
