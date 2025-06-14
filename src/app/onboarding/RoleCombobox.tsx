@@ -19,6 +19,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
+interface RoleComboboxProps {
+  onValueChange: (value: string) => void;
+}
+
 const roles = [
   {
     value: "employee",
@@ -30,7 +34,7 @@ const roles = [
   },
 ];
 
-export function RoleCombobox() {
+export function RoleCombobox({ onValueChange }: RoleComboboxProps) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 
@@ -60,7 +64,9 @@ export function RoleCombobox() {
                   key={role.value}
                   value={role.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
+                    const newValue = currentValue === value ? "" : currentValue;
+                    setValue(newValue);
+                    onValueChange(newValue);
                     setOpen(false);
                   }}
                 >

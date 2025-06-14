@@ -1,4 +1,5 @@
 "use server";
+
 import { auth, clerkClient } from "@clerk/nextjs/server";
 
 export const completeOnboarding = async (formData: FormData) => {
@@ -20,7 +21,6 @@ export const completeOnboarding = async (formData: FormData) => {
     });
     return { message: res.publicMetadata };
   } catch (err) {
-    console.error("ERROR: ", err);
-    return { error: "There was an error updating the user metadata" };
+    return { error: "There was an error updating the user metadata." };
   }
 };
