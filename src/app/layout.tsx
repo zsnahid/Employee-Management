@@ -34,7 +34,7 @@ export default function RootLayout({
         <body
           className={`${interSans.variable} ${jetBrainsMono.variable} ${outfitSans.variable} antialiased`}
         >
-          <main className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+          <main className="mx-auto max-w-screen-xl">
             {children}
           </main>
         </body>
