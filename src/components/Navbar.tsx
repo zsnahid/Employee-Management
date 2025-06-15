@@ -53,7 +53,7 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="hidden md:flex sm:gap-4">
+            <div className="hidden sm:gap-4 md:flex">
               <SignedOut>
                 <SignInButton>
                   <Button>Sign In</Button>

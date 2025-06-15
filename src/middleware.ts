@@ -2,7 +2,10 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
 const isOnboardingRoute = createRouteMatcher(["/onboarding"]);
-const isPublicRoute = createRouteMatcher(["/", "/(sign-in)(.*)", "/(sign-up)(.*)"]);
+const isPublicRoute = createRouteMatcher(["/", "/sign-in(.*)", "/sign-up(.*)"]);
+const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
+const isHRRoute = createRouteMatcher(["/hr(.*)"]);
+const isEmployeeRoute = createRouteMatcher(["/employee(.*)"]);
 
 export default clerkMiddleware(async (auth, req: NextRequest) => {
   const { userId, sessionClaims, redirectToSignIn } = await auth();
@@ -23,8 +26,50 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
     return NextResponse.redirect(onboardingUrl);
   }
 
-  // If the user is logged in and the route is protected, let them view.
-  if (userId && !isPublicRoute(req)) return NextResponse.next();
+  // Handle role-based redirects for the root path
+  if (
+    userId &&
+    req.nextUrl.pathname === "/" &&
+    sessionClaims?.metadata?.onboardingComplete
+  ) {
+    const userRole = sessionClaims?.metadata?.role;
+
+    switch (userRole) {
+      case "admin":
+        return NextResponse.redirect(new URL("/admin", req.url));
+      case "hr":
+        return NextResponse.redirect(new URL("/hr", req.url));
+      case "employee":
+        return NextResponse.redirect(new URL("/employee", req.url));
+      default:
+        return NextResponse.redirect(new URL("/onboarding", req.url));
+    }
+  }
+
+  // Role-based route protection
+  if (userId && sessionClaims?.metadata?.onboardingComplete) {
+    const userRole = sessionClaims.metadata.role;
+
+    // Protect admin routes
+    if (isAdminRoute(req) && userRole !== "admin") {
+      const dashboardUrl = new URL(`/${userRole}`, req.url);
+      return NextResponse.redirect(dashboardUrl);
+    }
+
+    // Protect HR routes
+    if (isHRRoute(req) && userRole !== "hr") {
+      const dashboardUrl = new URL(`/${userRole}`, req.url);
+      return NextResponse.redirect(dashboardUrl);
+    }
+
+    // Protect Employee routes
+    if (isEmployeeRoute(req) && userRole !== "employee") {
+      const dashboardUrl = new URL(`/${userRole}`, req.url);
+      return NextResponse.redirect(dashboardUrl);
+    }
+  }
+
+  return NextResponse.next();
 });
 
 export const config = {

@@ -59,7 +59,7 @@ export async function createUser(formData: FormData) {
       throw new Error("Failed to insert into database");
     }
 
-    return { success: true, insertedId: res.insertedId };
+    return { success: true, insertedId: res.insertedId.toString() };
   } catch (e) {
     console.error(e);
     return {

@@ -1,5 +1,3 @@
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import "@/globals.css";
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Outfit } from "next/font/google";
@@ -34,13 +32,11 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${interSans.variable} ${jetBrainsMono.variable} ${outfitSans.variable} flex min-h-dvh flex-col antialiased`}
+          className={`${interSans.variable} ${jetBrainsMono.variable} ${outfitSans.variable} antialiased`}
         >
-          <Navbar />
-          <main className="mx-auto max-w-screen-xl flex-1 space-y-16 px-4 sm:px-6 lg:px-8">
+          <main className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
             {children}
           </main>
-          <Footer />
         </body>
       </html>
     </ClerkProvider>
