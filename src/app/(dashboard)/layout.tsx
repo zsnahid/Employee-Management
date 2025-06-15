@@ -9,14 +9,20 @@ export interface NavLink {
 const adminNavLinks: NavLink[] = [
   { href: "/admin/all-employee-list", label: "All Employees" },
   { href: "/admin/payroll", label: "Payroll" },
+  { href: "/admin/departments", label: "Departments" },
+  { href: "/admin/reports", label: "Reports" },
 ];
 const employeeNavLinks: NavLink[] = [
   { href: "/employee/work-sheet", label: "Work Sheet" },
   { href: "/employee/payment-history", label: "Payment History" },
+  { href: "/employee/leave-requests", label: "Leave Requests" },
+  { href: "/employee/profile", label: "Profile" },
 ];
 const hrNavLinks: NavLink[] = [
   { href: "/hr/employee-list", label: "Employee List" },
   { href: "/hr/progress", label: "Progress" },
+  { href: "/hr/requests", label: "Requests" },
+  { href: "/hr/onboarding", label: "Onboarding" },
 ];
 
 export default async function DashboardLayout({
@@ -26,7 +32,6 @@ export default async function DashboardLayout({
 }) {
   const { sessionClaims } = await auth();
   const userRole = sessionClaims?.metadata?.role;
-  console.log(userRole);
 
   let navLinks: NavLink[] = [];
 
@@ -39,9 +44,11 @@ export default async function DashboardLayout({
   }
 
   return (
-    <section>
+    <div className="bg-background flex h-screen">
       <Sidebar links={navLinks} />
-      <main>{children}</main>
-    </section>
+      <main className="flex-1 overflow-y-auto">
+        <div className="container mx-auto p-6">{children}</div>
+      </main>
+    </div>
   );
 }
