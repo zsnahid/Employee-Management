@@ -13,6 +13,8 @@ import {
   TrendingUp,
   MessageSquare,
   Target,
+  MousePointerClickIcon,
+  CircleDollarSignIcon,
 } from "lucide-react";
 
 export default function EmployeeDashboard() {
@@ -91,18 +93,18 @@ export default function EmployeeDashboard() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-foreground text-3xl font-bold">
+          <h1 className="text-foreground text-2xl font-bold sm:text-3xl">
             Welcome back, {user?.firstName}!
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-sm sm:text-base">
             Here's what's happening with your work today
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 sm:self-start">
           <SignedIn>
             <UserButton />
           </SignedIn>
@@ -110,7 +112,7 @@ export default function EmployeeDashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
@@ -136,7 +138,7 @@ export default function EmployeeDashboard() {
             <DollarSign className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className="text-lg font-bold sm:text-2xl">
               ${(employeeStats.currentSalary / 12).toLocaleString()}
             </div>
             <p className="text-muted-foreground text-xs">
@@ -175,25 +177,25 @@ export default function EmployeeDashboard() {
       </div>
 
       {/* Main Content Grid */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 xl:grid-cols-3">
         {/* Recent Tasks */}
-        <Card className="lg:col-span-2">
+        <Card className="xl:col-span-2">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Target className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <Target className="h-4 w-4 sm:h-5 sm:w-5" />
               Recent Tasks
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {recentTasks.map((task) => (
                 <div
                   key={task.id}
-                  className="flex items-center justify-between rounded-lg border p-3"
+                  className="flex flex-col gap-3 rounded-lg border p-3 sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div className="flex items-center gap-3">
                     <div
-                      className={`h-2 w-2 rounded-full ${
+                      className={`h-2 w-2 flex-shrink-0 rounded-full ${
                         task.status === "completed"
                           ? "bg-green-500"
                           : task.status === "in-progress"
@@ -201,14 +203,16 @@ export default function EmployeeDashboard() {
                             : "bg-yellow-500"
                       }`}
                     ></div>
-                    <div>
-                      <p className="font-medium">{task.title}</p>
-                      <p className="text-muted-foreground text-sm">
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium sm:text-base">
+                        {task.title}
+                      </p>
+                      <p className="text-muted-foreground text-xs sm:text-sm">
                         Due: {task.dueDate}
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 sm:flex-shrink-0">
                     <Badge
                       variant={
                         task.priority === "high"
@@ -217,6 +221,7 @@ export default function EmployeeDashboard() {
                             ? "default"
                             : "secondary"
                       }
+                      className="text-xs"
                     >
                       {task.priority}
                     </Badge>
@@ -228,6 +233,7 @@ export default function EmployeeDashboard() {
                             ? "secondary"
                             : "outline"
                       }
+                      className="text-xs"
                     >
                       {task.status}
                     </Badge>
@@ -241,18 +247,20 @@ export default function EmployeeDashboard() {
         {/* Upcoming Events */}
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Calendar className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <Calendar className="h-4 w-4 sm:h-5 sm:w-5" />
               Upcoming Events
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {upcomingEvents.map((event) => (
                 <div key={event.id} className="flex gap-3">
-                  <div className="bg-primary mt-2 h-2 w-2 rounded-full"></div>
-                  <div className="flex-1 space-y-1">
-                    <p className="text-sm font-medium">{event.title}</p>
+                  <div className="bg-primary mt-2 h-2 w-2 flex-shrink-0 rounded-full"></div>
+                  <div className="min-w-0 flex-1 space-y-1">
+                    <p className="truncate text-sm font-medium">
+                      {event.title}
+                    </p>
                     <p className="text-muted-foreground text-xs">
                       {event.date}
                     </p>
@@ -268,30 +276,34 @@ export default function EmployeeDashboard() {
       </div>
 
       {/* Bottom Section */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2">
         {/* Recent Payments */}
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <DollarSign className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <CircleDollarSignIcon className="h-4 w-4 sm:h-5 sm:w-5" />
               Recent Payments
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {recentPayments.map((payment) => (
                 <div
                   key={payment.id}
-                  className="bg-muted/50 flex items-center justify-between rounded-lg p-3"
+                  className="bg-muted/50 flex flex-col gap-2 rounded-lg p-3 sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div>
-                    <p className="font-medium">{payment.month}</p>
-                    <p className="text-muted-foreground text-sm">
+                    <p className="text-sm font-medium sm:text-base">
+                      {payment.month}
+                    </p>
+                    <p className="text-muted-foreground text-xs sm:text-sm">
                       {payment.date}
                     </p>
                   </div>
-                  <div className="text-right">
-                    <p className="font-bold">${payment.amount}</p>
+                  <div className="flex items-center justify-between sm:block sm:text-right">
+                    <p className="text-sm font-bold sm:text-base">
+                      ${payment.amount}
+                    </p>
                     <Badge variant="default" className="text-xs">
                       <CheckCircle className="mr-1 h-3 w-3" />
                       {payment.status}
@@ -306,25 +318,40 @@ export default function EmployeeDashboard() {
         {/* Quick Actions */}
         <Card>
           <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <MousePointerClickIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+              Quick Actions
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 gap-4">
-              <Button variant="outline" className="h-20 flex-col gap-2">
-                <Calendar className="h-6 w-6" />
-                Request Leave
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <Button
+                variant="outline"
+                className="h-16 flex-col gap-1 sm:h-20 sm:gap-2"
+              >
+                <Calendar className="h-4 w-4 sm:h-6 sm:w-6" />
+                <span className="text-xs sm:text-sm">Request Leave</span>
               </Button>
-              <Button variant="outline" className="h-20 flex-col gap-2">
-                <Clock className="h-6 w-6" />
-                Log Hours
+              <Button
+                variant="outline"
+                className="h-16 flex-col gap-1 sm:h-20 sm:gap-2"
+              >
+                <Clock className="h-4 w-4 sm:h-6 sm:w-6" />
+                <span className="text-xs sm:text-sm">Log Hours</span>
               </Button>
-              <Button variant="outline" className="h-20 flex-col gap-2">
-                <FileText className="h-6 w-6" />
-                View Payslips
+              <Button
+                variant="outline"
+                className="h-16 flex-col gap-1 sm:h-20 sm:gap-2"
+              >
+                <FileText className="h-4 w-4 sm:h-6 sm:w-6" />
+                <span className="text-xs sm:text-sm">View Payslips</span>
               </Button>
-              <Button variant="outline" className="h-20 flex-col gap-2">
-                <MessageSquare className="h-6 w-6" />
-                Contact HR
+              <Button
+                variant="outline"
+                className="h-16 flex-col gap-1 sm:h-20 sm:gap-2"
+              >
+                <MessageSquare className="h-4 w-4 sm:h-6 sm:w-6" />
+                <span className="text-xs sm:text-sm">Contact HR</span>
               </Button>
             </div>
           </CardContent>

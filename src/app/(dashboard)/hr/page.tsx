@@ -51,63 +51,85 @@ export default function HRDashboard() {
       status: "review",
       avatar: "/avatars/carol.jpg",
     },
-  ];
-
-  const recentOnboarding = [
     {
-      id: 1,
-      name: "David Wilson",
-      position: "Software Engineer",
-      progress: 85,
+      id: 4,
+      employee: "David Wilson",
+      type: "Training Request",
+      date: "Dec 18",
+      status: "pending",
       avatar: "/avatars/david.jpg",
     },
+  ];
+
+  const recentHires = [
     {
-      id: 2,
-      name: "Emma Brown",
-      position: "Product Manager",
-      progress: 92,
+      id: 1,
+      name: "Emma Thompson",
+      position: "Software Engineer",
+      department: "Engineering",
+      startDate: "Dec 10",
       avatar: "/avatars/emma.jpg",
     },
     {
+      id: 2,
+      name: "James Rodriguez",
+      position: "Product Manager",
+      department: "Product",
+      startDate: "Dec 8",
+      avatar: "/avatars/james.jpg",
+    },
+    {
       id: 3,
-      name: "Frank Miller",
-      position: "UI Designer",
-      progress: 67,
-      avatar: "/avatars/frank.jpg",
+      name: "Sarah Kim",
+      position: "UX Designer",
+      department: "Design",
+      startDate: "Dec 5",
+      avatar: "/avatars/sarah.jpg",
     },
   ];
 
-  const upcomingEvents = [
-    { id: 1, title: "Team Building Event", date: "Dec 18", type: "event" },
-    { id: 2, title: "Performance Reviews", date: "Dec 20", type: "deadline" },
-    { id: 3, title: "New Hire Orientation", date: "Dec 22", type: "meeting" },
-    { id: 4, title: "Holiday Party", date: "Dec 24", type: "event" },
+  const upcomingTasks = [
+    { id: 1, task: "Performance Reviews Due", date: "Dec 20", priority: "high" },
+    { id: 2, task: "New Hire Orientation", date: "Dec 18", priority: "medium" },
+    { id: 3, task: "Benefits Enrollment", date: "Dec 25", priority: "low" },
+    { id: 4, task: "Team Building Event", date: "Dec 22", priority: "medium" },
+  ];
+
+  const departmentStats = [
+    { name: "Engineering", count: 25, growth: "+3" },
+    { name: "Sales", count: 18, growth: "+2" },
+    { name: "Marketing", count: 12, growth: "+1" },
+    { name: "Design", count: 8, growth: "+1" },
+    { name: "HR", count: 6, growth: "0" },
+    { name: "Finance", count: 10, growth: "+1" },
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-foreground text-3xl font-bold">HR Dashboard</h1>
-          <p className="text-muted-foreground">
-            Manage your team and employee requests
+          <h1 className="text-foreground text-2xl sm:text-3xl font-bold">
+            HR Dashboard
+          </h1>
+          <p className="text-muted-foreground text-sm sm:text-base">
+            Manage your workforce and streamline HR processes
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <Button variant="outline" size="sm" className="w-full sm:w-auto">
             <FileText className="mr-2 h-4 w-4" />
             Generate Report
           </Button>
-          <Button size="sm">
+          <Button size="sm" className="w-full sm:w-auto">
             <Plus className="mr-2 h-4 w-4" />
-            New Request
+            Add Employee
           </Button>
         </div>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
@@ -118,22 +140,7 @@ export default function HRDashboard() {
           <CardContent>
             <div className="text-2xl font-bold">{stats.totalEmployees}</div>
             <p className="text-muted-foreground text-xs">
-              Under your management
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Pending Requests
-            </CardTitle>
-            <AlertTriangle className="text-muted-foreground h-4 w-4" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{stats.pendingRequests}</div>
-            <p className="text-muted-foreground text-xs">
-              Require your approval
+              <span className="text-green-600">+{stats.completedOnboarding}</span> this month
             </p>
           </CardContent>
         </Card>
@@ -147,59 +154,68 @@ export default function HRDashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.activeProjects}</div>
-            <p className="text-muted-foreground text-xs">In progress</p>
+            <p className="text-muted-foreground text-xs">Across all departments</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Onboarding</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Pending Requests
+            </CardTitle>
+            <AlertTriangle className="text-muted-foreground h-4 w-4" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{stats.pendingRequests}</div>
+            <p className="text-muted-foreground text-xs">Require attention</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">
+              Onboarding Progress
+            </CardTitle>
             <UserCheck className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              {stats.completedOnboarding}
-            </div>
+            <div className="text-2xl font-bold">{stats.completedOnboarding}/6</div>
             <p className="text-muted-foreground text-xs">
-              Completed this month
+              <span className="text-green-600">83%</span> completion rate
             </p>
           </CardContent>
         </Card>
       </div>
 
       {/* Main Content Grid */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 xl:grid-cols-3">
         {/* Pending Requests */}
-        <Card className="lg:col-span-2">
+        <Card className="xl:col-span-2">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <ClipboardList className="h-4 w-4 sm:h-5 sm:w-5" />
               Pending Requests
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {pendingRequests.map((request) => (
                 <div
                   key={request.id}
-                  className="flex items-center justify-between rounded-lg border p-4"
+                  className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between rounded-lg border p-3"
                 >
                   <div className="flex items-center gap-3">
-                    <Avatar className="h-10 w-10">
-                      <AvatarImage
-                        src={request.avatar}
-                        alt={request.employee}
-                      />
-                      <AvatarFallback>
-                        {request.employee
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
+                    <Avatar className="h-8 w-8 sm:h-10 sm:w-10">
+                      <AvatarImage src={request.avatar} alt={request.employee} />
+                      <AvatarFallback className="text-xs">
+                        {request.employee.split(" ").map(n => n[0]).join("")}
                       </AvatarFallback>
                     </Avatar>
-                    <div>
-                      <p className="font-medium">{request.employee}</p>
-                      <p className="text-muted-foreground text-sm">
+                    <div className="min-w-0 flex-1">
+                      <p className="font-medium text-sm sm:text-base truncate">
+                        {request.employee}
+                      </p>
+                      <p className="text-muted-foreground text-xs sm:text-sm">
                         {request.type}
                       </p>
                       <p className="text-muted-foreground text-xs">
@@ -209,22 +225,19 @@ export default function HRDashboard() {
                   </div>
                   <div className="flex items-center gap-2">
                     <Badge
-                      variant={
-                        request.status === "pending"
-                          ? "destructive"
-                          : "secondary"
-                      }
+                      variant={request.status === "pending" ? "secondary" : "default"}
+                      className="text-xs"
                     >
                       {request.status}
                     </Badge>
-                    <Button size="sm" variant="outline">
-                      <CheckCircle className="mr-1 h-4 w-4" />
-                      Approve
-                    </Button>
-                    <Button size="sm" variant="outline">
-                      <XCircle className="mr-1 h-4 w-4" />
-                      Deny
-                    </Button>
+                    <div className="flex gap-1">
+                      <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
+                        <CheckCircle className="h-4 w-4 text-green-600" />
+                      </Button>
+                      <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
+                        <XCircle className="h-4 w-4 text-red-600" />
+                      </Button>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -232,31 +245,31 @@ export default function HRDashboard() {
           </CardContent>
         </Card>
 
-        {/* Upcoming Events */}
+        {/* Recent Hires */}
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Calendar className="h-5 w-5" />
-              Upcoming Events
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <UserCheck className="h-4 w-4 sm:h-5 sm:w-5" />
+              Recent Hires
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              {upcomingEvents.map((event) => (
-                <div key={event.id} className="flex gap-3">
-                  <div
-                    className={`mt-2 h-2 w-2 rounded-full ${
-                      event.type === "event"
-                        ? "bg-blue-500"
-                        : event.type === "deadline"
-                          ? "bg-red-500"
-                          : "bg-green-500"
-                    }`}
-                  ></div>
-                  <div className="flex-1 space-y-1">
-                    <p className="text-sm font-medium">{event.title}</p>
+            <div className="space-y-3 sm:space-y-4">
+              {recentHires.map((hire) => (
+                <div key={hire.id} className="flex items-center gap-3">
+                  <Avatar className="h-8 w-8 sm:h-10 sm:w-10">
+                    <AvatarImage src={hire.avatar} alt={hire.name} />
+                    <AvatarFallback className="text-xs">
+                      {hire.name.split(" ").map(n => n[0]).join("")}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1 space-y-1 min-w-0">
+                    <p className="text-sm font-medium truncate">{hire.name}</p>
+                    <p className="text-muted-foreground text-xs truncate">
+                      {hire.position}
+                    </p>
                     <p className="text-muted-foreground text-xs">
-                      {event.date}
+                      Started: {hire.startDate}
                     </p>
                   </div>
                 </div>
@@ -266,49 +279,112 @@ export default function HRDashboard() {
         </Card>
       </div>
 
-      {/* Onboarding Progress */}
+      {/* Bottom Section */}
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2">
+        {/* Department Overview */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5" />
+              Department Overview
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3 sm:space-y-4">
+              {departmentStats.map((dept) => (
+                <div
+                  key={dept.name}
+                  className="bg-muted/50 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between rounded-lg p-3"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="bg-primary h-2 w-2 rounded-full"></div>
+                    <span className="font-medium text-sm sm:text-base">{dept.name}</span>
+                  </div>
+                  <div className="flex items-center gap-3 sm:ml-auto">
+                    <Badge variant="secondary" className="text-xs">
+                      {dept.count} employees
+                    </Badge>
+                    <span className="text-sm font-medium text-green-600">
+                      {dept.growth !== "0" ? dept.growth : "No change"}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Upcoming Tasks */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <Calendar className="h-4 w-4 sm:h-5 sm:w-5" />
+              Upcoming Tasks
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3 sm:space-y-4">
+              {upcomingTasks.map((task) => (
+                <div key={task.id} className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div
+                      className={`h-2 w-2 rounded-full ${
+                        task.priority === "high"
+                          ? "bg-red-500"
+                          : task.priority === "medium"
+                            ? "bg-yellow-500"
+                            : "bg-green-500"
+                      }`}
+                    ></div>
+                    <div className="min-w-0 flex-1">
+                      <p className="font-medium text-sm sm:text-base truncate">{task.task}</p>
+                      <p className="text-muted-foreground text-xs sm:text-sm">
+                        {task.date}
+                      </p>
+                    </div>
+                  </div>
+                  <Badge
+                    variant={
+                      task.priority === "high"
+                        ? "destructive"
+                        : task.priority === "medium"
+                          ? "default"
+                          : "secondary"
+                    }
+                    className="text-xs"
+                  >
+                    {task.priority}
+                  </Badge>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Quick Actions */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <TrendingUp className="h-5 w-5" />
-            Onboarding Progress
-          </CardTitle>
+          <CardTitle className="text-base sm:text-lg">Quick Actions</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {recentOnboarding.map((person) => (
-              <div key={person.id} className="rounded-lg border p-4">
-                <div className="mb-3 flex items-center gap-3">
-                  <Avatar className="h-10 w-10">
-                    <AvatarImage src={person.avatar} alt={person.name} />
-                    <AvatarFallback>
-                      {person.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="font-medium">{person.name}</p>
-                    <p className="text-muted-foreground text-sm">
-                      {person.position}
-                    </p>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span>Progress</span>
-                    <span>{person.progress}%</span>
-                  </div>
-                  <div className="bg-muted h-2 w-full rounded-full">
-                    <div
-                      className="bg-primary h-2 rounded-full transition-all duration-300"
-                      style={{ width: `${person.progress}%` }}
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+            <Button variant="outline" className="h-16 sm:h-20 flex-col gap-1 sm:gap-2">
+              <Plus className="h-4 w-4 sm:h-6 sm:w-6" />
+              <span className="text-xs sm:text-sm">Add Employee</span>
+            </Button>
+            <Button variant="outline" className="h-16 sm:h-20 flex-col gap-1 sm:gap-2">
+              <Calendar className="h-4 w-4 sm:h-6 sm:w-6" />
+              <span className="text-xs sm:text-sm">Schedule Interview</span>
+            </Button>
+            <Button variant="outline" className="h-16 sm:h-20 flex-col gap-1 sm:gap-2">
+              <FileText className="h-4 w-4 sm:h-6 sm:w-6" />
+              <span className="text-xs sm:text-sm">Generate Report</span>
+            </Button>
+            <Button variant="outline" className="h-16 sm:h-20 flex-col gap-1 sm:gap-2">
+              <Users className="h-4 w-4 sm:h-6 sm:w-6" />
+              <span className="text-xs sm:text-sm">Manage Teams</span>
+            </Button>
           </div>
         </CardContent>
       </Card>

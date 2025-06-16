@@ -68,23 +68,23 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-foreground text-3xl font-bold">
+          <h1 className="text-foreground text-2xl sm:text-3xl font-bold">
             Admin Dashboard
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-sm sm:text-base">
             Overview of your organization's performance
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <Button variant="outline" size="sm" className="w-full sm:w-auto">
             <Calendar className="mr-2 h-4 w-4" />
             Last 30 days
           </Button>
-          <Button size="sm">
+          <Button size="sm" className="w-full sm:w-auto">
             <UserPlus className="mr-2 h-4 w-4" />
             Add Employee
           </Button>
@@ -92,7 +92,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
@@ -132,7 +132,7 @@ export default function AdminDashboard() {
             <DollarSign className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className="text-lg sm:text-2xl font-bold">
               ${stats.totalPayroll.toLocaleString()}
             </div>
             <p className="text-muted-foreground text-xs">
@@ -157,28 +157,30 @@ export default function AdminDashboard() {
       </div>
 
       {/* Main Content Grid */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 xl:grid-cols-3">
         {/* Department Overview */}
-        <Card className="lg:col-span-2">
+        <Card className="xl:col-span-2">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <BarChart3 className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5" />
               Department Overview
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {departmentStats.map((dept) => (
                 <div
                   key={dept.name}
-                  className="bg-muted/50 flex items-center justify-between rounded-lg p-3"
+                  className="bg-muted/50 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between rounded-lg p-3"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="bg-primary h-2 w-2 rounded-full"></div>
-                    <span className="font-medium">{dept.name}</span>
+                    <div className="bg-primary h-2 w-2 rounded-full flex-shrink-0"></div>
+                    <span className="font-medium text-sm sm:text-base">{dept.name}</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <Badge variant="secondary">{dept.count} employees</Badge>
+                  <div className="flex items-center gap-3 sm:ml-auto">
+                    <Badge variant="secondary" className="text-xs">
+                      {dept.count} employees
+                    </Badge>
                     <span className="text-sm font-medium text-green-600">
                       {dept.growth}
                     </span>
@@ -192,17 +194,17 @@ export default function AdminDashboard() {
         {/* Recent Activities */}
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Clock className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <Clock className="h-4 w-4 sm:h-5 sm:w-5" />
               Recent Activities
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {recentActivities.map((activity) => (
                 <div key={activity.id} className="flex gap-3">
                   <div
-                    className={`mt-2 h-2 w-2 rounded-full ${
+                    className={`mt-2 h-2 w-2 rounded-full flex-shrink-0 ${
                       activity.type === "success"
                         ? "bg-green-500"
                         : activity.type === "warning"
@@ -210,9 +212,9 @@ export default function AdminDashboard() {
                           : "bg-blue-500"
                     }`}
                   ></div>
-                  <div className="flex-1 space-y-1">
-                    <p className="text-sm font-medium">{activity.action}</p>
-                    <p className="text-muted-foreground text-sm">
+                  <div className="flex-1 space-y-1 min-w-0">
+                    <p className="text-sm font-medium truncate">{activity.action}</p>
+                    <p className="text-muted-foreground text-sm truncate">
                       {activity.name}
                     </p>
                     <p className="text-muted-foreground text-xs">
@@ -229,25 +231,25 @@ export default function AdminDashboard() {
       {/* Quick Actions */}
       <Card>
         <CardHeader>
-          <CardTitle>Quick Actions</CardTitle>
+          <CardTitle className="text-base sm:text-lg">Quick Actions</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <Button variant="outline" className="h-20 flex-col gap-2">
-              <UserPlus className="h-6 w-6" />
-              Add Employee
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+            <Button variant="outline" className="h-16 sm:h-20 flex-col gap-1 sm:gap-2">
+              <UserPlus className="h-4 w-4 sm:h-6 sm:w-6" />
+              <span className="text-xs sm:text-sm">Add Employee</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2">
-              <DollarSign className="h-6 w-6" />
-              Process Payroll
+            <Button variant="outline" className="h-16 sm:h-20 flex-col gap-1 sm:gap-2">
+              <DollarSign className="h-4 w-4 sm:h-6 sm:w-6" />
+              <span className="text-xs sm:text-sm">Process Payroll</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2">
-              <PieChart className="h-6 w-6" />
-              View Reports
+            <Button variant="outline" className="h-16 sm:h-20 flex-col gap-1 sm:gap-2">
+              <PieChart className="h-4 w-4 sm:h-6 sm:w-6" />
+              <span className="text-xs sm:text-sm">View Reports</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2">
-              <TrendingUp className="h-6 w-6" />
-              Analytics
+            <Button variant="outline" className="h-16 sm:h-20 flex-col gap-1 sm:gap-2">
+              <TrendingUp className="h-4 w-4 sm:h-6 sm:w-6" />
+              <span className="text-xs sm:text-sm">Analytics</span>
             </Button>
           </div>
         </CardContent>

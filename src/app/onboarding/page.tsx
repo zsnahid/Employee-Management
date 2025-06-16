@@ -14,7 +14,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useState } from "react";
-import { RoleCombobox } from "./RoleCombobox";
+import { RoleCombobox } from "@/components/onboarding/RoleCombobox";
 import { createUser } from "@/lib/actions";
 
 export default function OnboardingComponent() {
