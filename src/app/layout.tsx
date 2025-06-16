@@ -1,21 +1,34 @@
 import "@/app/globals.css";
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Outfit } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 
 const interSans = Inter({
   variable: "--font-inter-sans",
   subsets: ["latin"],
-});
-
-const jetBrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
+  display: "swap",
+  fallback: [
+    "system-ui",
+    "-apple-system",
+    "BlinkMacSystemFont",
+    "Segoe UI",
+    "Roboto",
+    "sans-serif",
+  ],
 });
 
 const outfitSans = Outfit({
   variable: "--font-outfit-sans",
   subsets: ["latin"],
+  display: "swap",
+  fallback: [
+    "system-ui",
+    "-apple-system",
+    "BlinkMacSystemFont",
+    "Segoe UI",
+    "Roboto",
+    "sans-serif",
+  ],
 });
 
 export const metadata: Metadata = {
@@ -32,11 +45,9 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${interSans.variable} ${jetBrainsMono.variable} ${outfitSans.variable} antialiased`}
+          className={`${interSans.variable} ${outfitSans.variable} antialiased`}
         >
-          <main className="mx-auto max-w-screen-2xl">
-            {children}
-          </main>
+          <main className="mx-auto max-w-screen-2xl">{children}</main>
         </body>
       </html>
     </ClerkProvider>

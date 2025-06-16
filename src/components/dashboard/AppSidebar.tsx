@@ -1,3 +1,4 @@
+"use client";
 import {
   Sidebar,
   SidebarContent,
@@ -7,7 +8,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { auth } from "@clerk/nextjs/server";
+import { cn } from "@/lib/utils";
+import { useUser } from "@clerk/nextjs";
 import {
   BaggageClaimIcon,
   BanknoteArrowUpIcon,
@@ -22,6 +24,7 @@ import {
   UsersIcon,
 } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export interface NavLink {
   url: string;
@@ -55,9 +58,10 @@ const hrNavLinks: NavLink[] = [
   { title: "Requests", url: "/hr/requests", icon: FileUserIcon },
 ];
 
-export default async function AppSidebar() {
-  const { sessionClaims } = await auth();
-  const userRole = sessionClaims?.metadata?.role;
+export default function AppSidebar() {
+  const pathName = usePathname();
+  const { user } = useUser();
+  const userRole = user?.publicMetadata?.role;
 
   let navLinks: NavLink[] = [];
 
@@ -77,7 +81,15 @@ export default async function AppSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link href={`/${userRole}`}>
+                  <Link
+                    href={`/${userRole}`}
+                    className={cn(
+                      "transition-colors duration-200 ease-in-out",
+                      pathName === `/${userRole}`
+                        ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                        : "hover:bg-sidebar-accent/50",
+                    )}
+                  >
                     <LayoutDashboardIcon />
                     <span>Dashboard</span>
                   </Link>
@@ -86,7 +98,15 @@ export default async function AppSidebar() {
               {navLinks.map((navLink) => (
                 <SidebarMenuItem key={navLink.title}>
                   <SidebarMenuButton asChild>
-                    <Link href={navLink.url}>
+                    <Link
+                      href={navLink.url}
+                      className={cn(
+                        "transition-colors duration-200 ease-in-out",
+                        pathName === navLink.url
+                          ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                          : "hover:bg-sidebar-accent/50",
+                      )}
+                    >
                       <navLink.icon />
                       <span>{navLink.title}</span>
                     </Link>

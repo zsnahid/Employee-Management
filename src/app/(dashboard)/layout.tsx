@@ -1,4 +1,8 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import AppSidebar from "@/components/dashboard/AppSidebar";
 
 export default async function DashboardLayout({
@@ -8,11 +12,11 @@ export default async function DashboardLayout({
 }) {
   return (
     <SidebarProvider>
-      <AppSidebar/>
-      <main>
+      <AppSidebar />
+      <SidebarInset>
         <SidebarTrigger />
-        {children}
-      </main>
+        <>{children}</>
+      </SidebarInset>
     </SidebarProvider>
   );
 }
