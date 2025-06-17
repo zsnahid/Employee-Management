@@ -1,29 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Clock,
-  Calendar,
-  Plus,
-  Edit,
-  Target,
-  Timer,
-  Play,
-  Pause,
-  Square,
-  Coffee,
-} from "lucide-react";
+import { Clock, Calendar, Plus, Edit, Target } from "lucide-react";
+import TimeTracker from "@/components/work-sheet/TimeTracker";
 
 export default function WorkSheet() {
-  const [isTimerRunning, setIsTimerRunning] = useState(false);
-  const [currentTime, setCurrentTime] = useState("00:00:00");
-  const [selectedDate, setSelectedDate] = useState(
-    new Date().toISOString().split("T")[0],
-  );
-
   // Mock data - replace with actual data fetching
   const weeklyStats = {
     totalHours: 38.5,
@@ -112,10 +95,6 @@ export default function WorkSheet() {
     },
   ];
 
-  const toggleTimer = () => {
-    setIsTimerRunning(!isTimerRunning);
-  };
-
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "completed":
@@ -177,69 +156,10 @@ export default function WorkSheet() {
       </div>
 
       {/* Time Tracker */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Timer className="h-5 w-5" />
-            Time Tracker
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="bg-muted/50 flex items-center justify-between rounded-lg p-6">
-            <div className="flex items-center gap-6">
-              <div className="text-center">
-                <div className="font-mono text-4xl font-bold">
-                  {currentTime}
-                </div>
-                <p className="text-muted-foreground text-sm">Current Session</p>
-              </div>
-              <div className="flex gap-2">
-                <Button
-                  onClick={toggleTimer}
-                  size="lg"
-                  variant={isTimerRunning ? "destructive" : "default"}
-                  className="flex items-center gap-2"
-                >
-                  {isTimerRunning ? (
-                    <>
-                      <Pause className="h-5 w-5" />
-                      Pause
-                    </>
-                  ) : (
-                    <>
-                      <Play className="h-5 w-5" />
-                      Start
-                    </>
-                  )}
-                </Button>
-                <Button variant="outline" size="lg">
-                  <Square className="h-5 w-5" />
-                  Stop
-                </Button>
-                <Button variant="outline" size="lg">
-                  <Coffee className="h-5 w-5" />
-                  Break
-                </Button>
-              </div>
-            </div>
-            <div className="text-right">
-              <p className="text-lg font-semibold">Today: 6h 30m</p>
-              <p className="text-muted-foreground text-sm">
-                Started at 9:00 AM
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      <TimeTracker />
 
       {/* Weekly Stats */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-5">
-        <Card>
-          <CardContent className="p-4">
-            <div className="text-2xl font-bold">{weeklyStats.totalHours}h</div>
-            <p className="text-muted-foreground text-sm">Total Hours</p>
-          </CardContent>
-        </Card>
         <Card>
           <CardContent className="p-4">
             <div className="text-2xl font-bold">{weeklyStats.targetHours}h</div>
@@ -252,12 +172,7 @@ export default function WorkSheet() {
             <p className="text-muted-foreground text-sm">Overtime</p>
           </CardContent>
         </Card>
-        <Card>
-          <CardContent className="p-4">
-            <div className="text-2xl font-bold">{weeklyStats.breaks}h</div>
-            <p className="text-muted-foreground text-sm">Break Time</p>
-          </CardContent>
-        </Card>
+
         <Card>
           <CardContent className="p-4">
             <div className="text-2xl font-bold">

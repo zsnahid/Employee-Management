@@ -2,14 +2,16 @@
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
-import { useUser } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs";
 import {
   BaggageClaimIcon,
   BanknoteArrowUpIcon,
@@ -22,9 +24,11 @@ import {
   SheetIcon,
   UserCogIcon,
   UsersIcon,
+  ZapIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Badge } from "../ui/badge";
 
 export interface NavLink {
   url: string;
@@ -61,7 +65,7 @@ const hrNavLinks: NavLink[] = [
 export default function AppSidebar() {
   const pathName = usePathname();
   const { user } = useUser();
-  const userRole = user?.publicMetadata?.role;
+  const userRole = user?.publicMetadata?.role as string;
 
   let navLinks: NavLink[] = [];
 
@@ -75,6 +79,17 @@ export default function AppSidebar() {
 
   return (
     <Sidebar>
+      <SidebarHeader>
+        <div className="flex justify-center gap-2 md:justify-start">
+          <a href="/" className="flex items-center gap-2 font-medium">
+            <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
+              <ZapIcon className="size-4" />
+            </div>
+            SyncoHR
+          </a>
+        </div>
+      </SidebarHeader>
+
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
@@ -117,6 +132,12 @@ export default function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <div className="flex justify-between">
+          <UserButton />
+          <Badge className="capitalize">{userRole}</Badge>
+        </div>
+      </SidebarFooter>
     </Sidebar>
   );
 }
