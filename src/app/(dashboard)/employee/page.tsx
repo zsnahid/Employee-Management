@@ -1,6 +1,6 @@
 "use client";
 
-import { SignedIn, UserButton, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -95,20 +95,14 @@ export default function EmployeeDashboard() {
   return (
     <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-foreground text-2xl font-bold sm:text-3xl">
-            Welcome back, {user?.firstName}!
-          </h1>
-          <p className="text-muted-foreground text-sm sm:text-base">
-            Here's what's happening with your work today
-          </p>
-        </div>
-        <div className="flex items-center gap-2 sm:self-start">
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        </div>
+
+      <div>
+        <h1 className="text-foreground text-2xl font-bold sm:text-3xl">
+          Welcome back, {user?.firstName}!
+        </h1>
+        <p className="text-muted-foreground text-sm sm:text-base">
+          Here's what's happening with your work today
+        </p>
       </div>
 
       {/* Stats Grid */}

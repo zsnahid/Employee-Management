@@ -1,6 +1,6 @@
 import "@/app/globals.css";
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Inter, Outfit, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 
 const interSans = Inter({
@@ -31,6 +31,20 @@ const outfitSans = Outfit({
   ],
 });
 
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+  display: "swap",
+  fallback: [
+    "system-ui",
+    "-apple-system",
+    "BlinkMacSystemFont",
+    "Segoe UI",
+    "Roboto",
+    "sans-serif",
+  ],
+});
+
 export const metadata: Metadata = {
   title: "SyncoHR",
   description: "Your complete HR solution",
@@ -45,7 +59,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${interSans.variable} ${outfitSans.variable} antialiased`}
+          className={`${interSans.variable} ${outfitSans.variable} ${geistMono.variable} antialiased`}
         >
           <main className="mx-auto max-w-screen-2xl">{children}</main>
         </body>
