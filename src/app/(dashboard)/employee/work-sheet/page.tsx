@@ -8,13 +8,13 @@ import TaskSubmissionForm from "@/components/work-sheet/TaskSubmissionForm";
 
 export default function WorkSheet() {
   // Mock data - replace with actual data fetching
-  const weeklyStats = {
-    totalHours: 38.5,
-    targetHours: 40,
-    overtime: 0,
-    breaks: 5.5,
-    productivity: 92,
-  };
+  // const weeklyStats = {
+  //   totalHours: 38.5,
+  //   targetHours: 40,
+  //   overtime: 0,
+  //   breaks: 5.5,
+  //   productivity: 92,
+  // };
 
   return (
     <div className="space-y-6">
