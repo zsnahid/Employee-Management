@@ -62,15 +62,15 @@ export default function TaskSubmissionForm() {
 
   return (
     <Card className="w-full">
-      <CardHeader className="pb-4">
+      <CardHeader>
         <CardTitle className="text-lg font-semibold">Add New Task</CardTitle>
       </CardHeader>
       <CardContent>
         <form action={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
             {/* Tasks Dropdown */}
             <div className="space-y-2">
-              <Label htmlFor="task-select" className="text-sm font-medium">
+              <Label htmlFor="task-select" className="text-sm font-bold">
                 Tasks
               </Label>
               <DropdownMenu>
@@ -78,7 +78,7 @@ export default function TaskSubmissionForm() {
                   <Button
                     variant="outline"
                     className={cn(
-                      "h-10 w-full justify-between",
+                      "w-full justify-between",
                       !selectedTask && "text-muted-foreground",
                     )}
                   >
@@ -101,7 +101,7 @@ export default function TaskSubmissionForm() {
 
             {/* Progress Dropdown */}
             <div className="space-y-2">
-              <Label htmlFor="progress-select" className="text-sm font-medium">
+              <Label htmlFor="progress-select" className="text-sm font-bold">
                 Progress
               </Label>
               <DropdownMenu>
@@ -109,7 +109,7 @@ export default function TaskSubmissionForm() {
                   <Button
                     variant="outline"
                     className={cn(
-                      "h-10 w-full justify-between",
+                      "w-full justify-between",
                       !selectedProgress && "text-muted-foreground",
                     )}
                   >
@@ -132,7 +132,7 @@ export default function TaskSubmissionForm() {
 
             {/* Start Time */}
             <div className="space-y-2">
-              <Label htmlFor="start-time" className="text-sm font-medium">
+              <Label htmlFor="start-time" className="text-sm font-bold">
                 Start Time
               </Label>
               <Input
@@ -145,7 +145,7 @@ export default function TaskSubmissionForm() {
 
             {/* Completion Time */}
             <div className="space-y-2">
-              <Label htmlFor="completion-time" className="text-sm font-medium">
+              <Label htmlFor="completion-time" className="text-sm font-bold">
                 Completion Time
               </Label>
               <Input
