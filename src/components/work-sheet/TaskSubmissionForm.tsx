@@ -24,8 +24,11 @@ const taskOptions = [
   "Testing",
 ];
 
+const progressOptions = ["Completed", "Pending", "In Progress"];
+
 export default function TaskSubmissionForm() {
   const [selectedTask, setSelectedTask] = useState("");
+  const [selectedProgress, setSelectedProgress] = useState("");
   const [addWorkSheetEntry, { isLoading, isError, error }] =
     useAddWorkSheetEntryMutation();
 
@@ -33,7 +36,7 @@ export default function TaskSubmissionForm() {
     const startTime = formData.get("start-time") as string;
     const completionTime = formData.get("completion-time") as string;
 
-    if (!selectedTask || !startTime || !completionTime) {
+    if (!selectedTask || !selectedProgress || !startTime || !completionTime) {
       console.error("All fields are required");
       return;
     }
@@ -42,6 +45,7 @@ export default function TaskSubmissionForm() {
       // Convert FormData to the expected JSON structure
       const taskData = {
         selectedTask,
+        selectedProgress,
         startTime,
         completionTime,
       };
@@ -63,7 +67,7 @@ export default function TaskSubmissionForm() {
       </CardHeader>
       <CardContent>
         <form action={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
             {/* Tasks Dropdown */}
             <div className="space-y-2">
               <Label htmlFor="task-select" className="text-sm font-medium">
@@ -89,6 +93,37 @@ export default function TaskSubmissionForm() {
                       onClick={() => setSelectedTask(task)}
                     >
                       {task}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+
+            {/* Progress Dropdown */}
+            <div className="space-y-2">
+              <Label htmlFor="progress-select" className="text-sm font-medium">
+                Progress
+              </Label>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className={cn(
+                      "h-10 w-full justify-between",
+                      !selectedProgress && "text-muted-foreground",
+                    )}
+                  >
+                    {selectedProgress || "Select progress"}
+                    <ChevronDownIcon className="h-4 w-4 opacity-50" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-full">
+                  {progressOptions.map((progress) => (
+                    <DropdownMenuItem
+                      key={progress}
+                      onClick={() => setSelectedProgress(progress)}
+                    >
+                      {progress}
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>

@@ -57,7 +57,7 @@ export default function WorkSheet() {
       </div> */}
 
       {/* Main Content Grid */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Daily Entries */}
         <DailyEntries />
 
