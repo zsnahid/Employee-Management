@@ -21,10 +21,9 @@ export default function TimeTracker() {
   const [sessionStartTime, setSessionStartTime] = useState<Date | null>(null);
   const [isTracking, setIsTracking] = useState(false);
 
-  const { seconds, minutes, hours, isRunning, start, pause, reset } =
-    useStopwatch({
-      autoStart: false,
-    });
+  const { seconds, minutes, hours, start, reset } = useStopwatch({
+    autoStart: false,
+  });
 
   // Load time entries from localStorage on component mount
   useEffect(() => {
@@ -33,7 +32,7 @@ export default function TimeTracker() {
       try {
         const parsed = JSON.parse(savedEntries);
         // Convert date strings back to Date objects
-        const entriesWithDates = parsed.map((entry: any) => ({
+        const entriesWithDates = parsed.map((entry: { startTime: string | number | Date; endTime: string | number | Date; }) => ({
           ...entry,
           startTime: new Date(entry.startTime),
           endTime: new Date(entry.endTime),

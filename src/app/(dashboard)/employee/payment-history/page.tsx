@@ -20,7 +20,7 @@ import {
 
 export default function PaymentHistory() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedYear, setSelectedYear] = useState("2024");
+  // const [selectedYear, setSelectedYear] = useState("2024");
 
   // Mock data - replace with actual data fetching
   const yearlyStats = {

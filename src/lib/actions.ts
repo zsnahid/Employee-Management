@@ -1,8 +1,18 @@
 "use server";
 import clientPromise from "@/lib/mongodb";
 import { Document } from "mongodb";
-import { User } from "./definitions";
 import { auth } from "@clerk/nextjs/server";
+
+interface User {
+  userId: string;
+  userName: string;
+  role: string;
+  designation: string;
+  salary: number;
+  bank_account_no: string;
+  address: string;
+  createdAt: string;
+}
 
 export async function getCollection<Type extends Document = Document>(
   collectionName: string,
@@ -21,7 +31,7 @@ export async function createUser(formData: FormData) {
     const { userId } = await auth();
 
     // Add the userId from Clerk as unique id for db
-    userId && formData.append("id", userId);
+    if (userId) formData.append("id", userId);
 
     const usersCollection = await getCollection<User>("users");
 
@@ -51,14 +61,15 @@ export async function createUser(formData: FormData) {
       throw new Error("Invalid salary format");
     }
 
-    const user = {
-      id,
+    const user: User = {
+      userId: id,
       userName,
       role,
       designation,
       salary,
       bank_account_no,
       address,
+      createdAt: new Date().toISOString(),
     };
 
     const res = await usersCollection?.insertOne(user);

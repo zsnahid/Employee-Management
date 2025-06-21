@@ -1,7 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Calendar, Plus } from "lucide-react";
 import DailyEntries from "@/components/work-sheet/DailyEntries";
 import Tickets from "@/components/work-sheet/Tickets";
 import TaskSubmissionForm from "@/components/work-sheet/TaskSubmissionForm";
@@ -19,23 +17,12 @@ export default function WorkSheet() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-foreground text-3xl font-bold">Work Sheet</h1>
-          <p className="text-muted-foreground">
-            Track your time and manage daily tasks
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm">
-            <Calendar className="mr-2 h-4 w-4" />
-            This Week
-          </Button>
-          <Button size="sm">
-            <Plus className="mr-2 h-4 w-4" />
-            Add Entry
-          </Button>
-        </div>
+
+      <div>
+        <h1 className="text-foreground text-3xl font-bold">Work Sheet</h1>
+        <p className="text-muted-foreground">
+          Track your time and manage daily tasks
+        </p>
       </div>
 
       {/* Time Tracker */}

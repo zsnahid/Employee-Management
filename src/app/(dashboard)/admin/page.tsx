@@ -76,7 +76,7 @@ export default function AdminDashboard() {
             Admin Dashboard
           </h1>
           <p className="text-muted-foreground text-sm sm:text-base">
-            Overview of your organization's performance
+            Overview of your organization&apos;s performance
           </p>
         </div>
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center">

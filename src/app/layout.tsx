@@ -2,6 +2,7 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 import { Inter, Outfit, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { StoreProvider } from "@/providers/StoreProvider";
 
 const interSans = Inter({
   variable: "--font-inter-sans",
@@ -61,7 +62,9 @@ export default function RootLayout({
         <body
           className={`${interSans.variable} ${outfitSans.variable} ${geistMono.variable} antialiased`}
         >
-          <main className="mx-auto max-w-screen-2xl">{children}</main>
+          <StoreProvider>
+            <main className="mx-auto max-w-screen-2xl">{children}</main>
+          </StoreProvider>
         </body>
       </html>
     </ClerkProvider>

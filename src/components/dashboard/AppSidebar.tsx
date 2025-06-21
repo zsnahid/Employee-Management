@@ -81,12 +81,12 @@ export default function AppSidebar() {
     <Sidebar>
       <SidebarHeader>
         <div className="flex justify-center gap-2 md:justify-start">
-          <a href="/" className="flex items-center gap-2 font-medium">
+          <Link href="/" className="flex items-center gap-2 font-medium">
             <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
               <ZapIcon className="size-4" />
             </div>
             SyncoHR
-          </a>
+          </Link>
         </div>
       </SidebarHeader>
 

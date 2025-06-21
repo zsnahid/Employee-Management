@@ -101,7 +101,7 @@ export default function EmployeeDashboard() {
           Welcome back, {user?.firstName}!
         </h1>
         <p className="text-muted-foreground text-sm sm:text-base">
-          Here's what's happening with your work today
+          Here&apos;s what&apos;s happening with your work today
         </p>
       </div>
 

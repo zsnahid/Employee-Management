@@ -52,7 +52,7 @@ export default function OnboardingComponent() {
         router.push("/");
       }
       if (res?.error) {
-        setError(res?.error);
+        setError(String(res?.error));
       }
     } catch (error) {
       setError("An unexpected error occurred");
