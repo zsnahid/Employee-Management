@@ -1,3 +1,4 @@
+"use server";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -26,16 +27,16 @@ export async function POST(request: NextRequest) {
       "Content-Type": "application/json",
     };
     const payload = {
-      model: "deepseek/deepseek-r1-0528",
+      model: "deepseek/deepseek-r1-0528:free",
       messages: [
         {
           role: "system",
           content:
-            "You are a professional writing assistant. Rewrite the user's message",
+            "You are a professional writing assistant. Rewrite the user's message to be more professional, clear and well structured. IMPORTANT: Return ONLY the rewritten text with no additional commentary and explanations. Do not include phrases like 'Here is the rewritten message...' or any other preamble",
         },
         {
           role: "user",
-          content: `Please rewrite this message: "${message}"`,
+          content: message,
         },
       ],
     };
