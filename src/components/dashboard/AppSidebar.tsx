@@ -13,16 +13,15 @@ import {
 import { cn } from "@/lib/utils";
 import { UserButton, useUser } from "@clerk/nextjs";
 import {
-  BaggageClaimIcon,
   BanknoteArrowUpIcon,
   BuildingIcon,
   ChevronsUpIcon,
   FileUserIcon,
   LayoutDashboardIcon,
+  MailIcon,
   NotebookTextIcon,
   ReceiptIcon,
   SheetIcon,
-  UserCogIcon,
   UsersIcon,
   ZapIcon,
 } from "lucide-react";
@@ -50,11 +49,16 @@ const employeeNavLinks: NavLink[] = [
     icon: ReceiptIcon,
   },
   {
-    title: "Leave Requests",
-    url: "/employee/leave-requests",
-    icon: BaggageClaimIcon,
+    title: "Contact",
+    url: "/employee/contact-support",
+    icon: MailIcon,
   },
-  { title: "Profile", url: "/employee/profile", icon: UserCogIcon },
+  // {
+  //   title: "Leave Requests",
+  //   url: "/employee/leave-requests",
+  //   icon: BaggageClaimIcon,
+  // },
+  // { title: "Profile", url: "/employee/profile", icon: UserCogIcon },
 ];
 const hrNavLinks: NavLink[] = [
   { title: "Employee List", url: "/hr/employee-list", icon: UsersIcon },

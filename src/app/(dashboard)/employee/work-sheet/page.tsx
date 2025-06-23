@@ -19,7 +19,7 @@ export default function WorkSheet() {
       {/* Header */}
 
       <div>
-        <h1 className="text-foreground text-3xl font-bold">Work Sheet</h1>
+        <h1>Work Sheet</h1>
         <p className="text-muted-foreground">
           Track your time and manage daily tasks
         </p>

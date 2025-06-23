@@ -148,7 +148,7 @@ export default function PaymentHistory() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-foreground text-3xl font-bold">
+          <h1>
             Payment History
           </h1>
           <p className="text-muted-foreground">

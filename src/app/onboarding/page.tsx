@@ -33,6 +33,7 @@ export default function OnboardingComponent() {
       setError("");
 
       // Add the selected role to form data
+      formData.append("email", user?.emailAddresses[0]?.emailAddress || "");
       formData.append("role", selectedRole);
 
       // Create user in database

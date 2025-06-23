@@ -1,7 +1,6 @@
-"use server";
-
 import { getCollection } from "@/lib/actions";
 import { auth } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 interface Task {
   userId: string;
@@ -17,13 +16,13 @@ export async function GET() {
     const { userId } = await auth();
 
     if (!userId) {
-      return Response.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const workSheetCollection = await getCollection<Task>("work-sheet");
 
     if (!workSheetCollection) {
-      return Response.json(
+      return NextResponse.json(
         { error: "Database connection failed" },
         { status: 500 },
       );
@@ -31,10 +30,13 @@ export async function GET() {
 
     const tasks = await workSheetCollection.find({ userId }).toArray();
 
-    return Response.json(tasks, { status: 200 });
+    return NextResponse.json(tasks, { status: 200 });
   } catch (error) {
     console.error("Error fetching work sheet entries: ", error);
-    return Response.json({ error: "Failed to fetch entries" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch entries" },
+      { status: 500 },
+    );
   }
 }
 
@@ -43,13 +45,13 @@ export async function POST(request: Request) {
     const { userId } = await auth();
 
     if (!userId) {
-      return Response.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const workSheetCollection = await getCollection<Task>("work-sheet");
 
     if (!workSheetCollection) {
-      return Response.json(
+      return NextResponse.json(
         { error: "Database connection failed" },
         { status: 500 },
       );
@@ -60,7 +62,7 @@ export async function POST(request: Request) {
     const { selectedTask, selectedProgress, startTime, completionTime } = body;
 
     if (!selectedTask || !selectedProgress || !startTime || !completionTime) {
-      return Response.json(
+      return NextResponse.json(
         { error: "All fields are required" },
         { status: 400 },
       );
@@ -71,11 +73,14 @@ export async function POST(request: Request) {
     const end = new Date(completionTime);
 
     if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-      return Response.json({ error: "Invalid date format" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Invalid date format" },
+        { status: 400 },
+      );
     }
 
     if (end <= start) {
-      return Response.json(
+      return NextResponse.json(
         { error: "Completion time must be after start time" },
         { status: 400 },
       );
@@ -93,7 +98,7 @@ export async function POST(request: Request) {
     const res = await workSheetCollection.insertOne(task);
 
     if (!res.insertedId) {
-      return Response.json(
+      return NextResponse.json(
         { error: "Failed to create entry" },
         { status: 500 },
       );
@@ -103,9 +108,12 @@ export async function POST(request: Request) {
     // RTK Query will use this to replace the optimistic update with real data
     const newDoc = await workSheetCollection.findOne({ _id: res.insertedId });
 
-    return Response.json(newDoc, { status: 201 });
+    return NextResponse.json(newDoc, { status: 201 });
   } catch (error) {
     console.error("Error creating work sheet entry: ", error);
-    return Response.json({ error: "Failed to create entry" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to create entry" },
+      { status: 500 },
+    );
   }
 }

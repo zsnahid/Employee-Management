@@ -6,11 +6,13 @@ import { auth } from "@clerk/nextjs/server";
 interface User {
   userId: string;
   userName: string;
+  email: string;
   role: string;
   designation: string;
   salary: number;
   bank_account_no: string;
   address: string;
+  isVerified: boolean;
   createdAt: string;
 }
 
@@ -37,6 +39,7 @@ export async function createUser(formData: FormData) {
 
     const id = formData.get("id") as string;
     const userName = formData.get("userName") as string;
+    const email = formData.get("email") as string;
     const role = formData.get("role") as string;
     const designation = formData.get("designation") as string;
     const salaryString = formData.get("salary") as string;
@@ -64,11 +67,13 @@ export async function createUser(formData: FormData) {
     const user: User = {
       userId: id,
       userName,
+      email,
       role,
       designation,
       salary,
       bank_account_no,
       address,
+      isVerified: false,
       createdAt: new Date().toISOString(),
     };
 

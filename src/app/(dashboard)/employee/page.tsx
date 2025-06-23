@@ -97,7 +97,7 @@ export default function EmployeeDashboard() {
       {/* Header */}
 
       <div>
-        <h1 className="text-foreground text-2xl font-bold sm:text-3xl">
+        <h1>
           Welcome back, {user?.firstName}!
         </h1>
         <p className="text-muted-foreground text-sm sm:text-base">
