@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import SignInForm from "@/components/sign-in/SignInForm";
 import Link from "next/link";
+import Credentials from "@/components/sign-in/Credentials";
 
 export default function LoginPage() {
   return (
@@ -19,7 +20,8 @@ export default function LoginPage() {
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-center">
-          <div className="w-full max-w-xs">
+          <div>
+            <Credentials />
             <Suspense fallback={<div>Loading...</div>}>
               <SignInForm />
             </Suspense>

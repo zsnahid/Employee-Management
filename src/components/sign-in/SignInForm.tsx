@@ -22,7 +22,7 @@ export default function SignInForm() {
           <>
             <SignIn.Step name="start">
               <div className="space-y-6">
-                <Card className="dark:bg-gray-900/80 border-0">
+                <Card className="dark:bg-gray-900/80">
                   <CardHeader className="space-y-1 pb-6 text-center">
                     <CardTitle className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
                       Sign in to SyncoHR
@@ -200,7 +200,11 @@ export default function SignInForm() {
                         </Button>
                       </SignIn.Action>
                       <SignIn.Action navigate="choose-strategy" asChild>
-                        <Button type="button" variant="link" className="text-sky-600">
+                        <Button
+                          type="button"
+                          variant="link"
+                          className="text-sky-600"
+                        >
                           Use another method
                         </Button>
                       </SignIn.Action>
